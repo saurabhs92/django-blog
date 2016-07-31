@@ -13,9 +13,12 @@ class Author(models.Model):
         return self.name
 
 class Category(models.Model):
-    cat_name = models.CharField(max_length=50)
-    cat_description = models.CharField(max_length=255)
+    cat_name = models.CharField('category name', max_length=50)
+    cat_description = models.CharField('category description', max_length=255)
     
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     def __str__(self):
         return self.cat_name
 
