@@ -6,7 +6,7 @@ from django.http import HttpResponse
 #    return render(request, 'blog/index.html', data)
 
 def post_list(request):
-    return HttpResponse('<h1>List</h1>')
+    return render(request, 'base.html', {})
     
 def post_create(request):
     return HttpResponse('<h1>Create</h1>')
