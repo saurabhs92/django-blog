@@ -6,8 +6,8 @@
 <h1>Contents of index.html page</h1>
 
 {% for obj in object_list %}
-
-<a href='{% url "detail" id=obj.id %}'>{{ obj.title }}</a> <br>
+{% url "blogs:detail" id=obj.id %}
+<a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <br>
 
 {{ obj.body }}<br>
 {{ obj.author }}<br>
