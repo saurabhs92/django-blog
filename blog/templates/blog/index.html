@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %} All posts {% endblock title %}
+{% block title %} {{ title }} {% endblock title %}
 
 {% block content %}
 <h1>Contents of index.html page</h1>
-<h1>{{ indexdata }}</h1>
+
+{% for obj in object_list %}
+
+{{ obj.title }}<br>
+{{ obj.body }}<br>
+{{ obj.author }}<br>
+{{ obj.category }}<br>
+{{ obj.tags }}<br>
+{{ obj.id }}<br>
+{{ obj.pk }}<br>
+<br>
+
+{% endfor %}
+
 {% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block content %}
+<h1>Contents of {{title}} page</h1>
+
+{{ instance.title }}<br>
+{{ instance.body }}<br>
+{{ instance.author }}<br>
+{{ instance.category }}<br>
+{{ instance.tags }}<br>
+{{ instance.id }}<br>
+{{ instance.pk }}<br>
+<br>
+
+{% endblock content %}
