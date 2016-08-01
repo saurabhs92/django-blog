@@ -7,7 +7,8 @@
 
 {% for obj in object_list %}
 
-{{ obj.title }}<br>
+<a href='{% url "detail" id=obj.id %}'>{{ obj.title }}</a> <br>
+
 {{ obj.body }}<br>
 {{ obj.author }}<br>
 {{ obj.category }}<br>
