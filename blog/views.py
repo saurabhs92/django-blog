@@ -24,7 +24,15 @@ def post_detail(request, id):
     return render(request, 'blog/post_detail.html', context)
     
 def post_create(request):
-    form = PostForm()
+    form = PostForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        print (form.cleaned_data.get('title'))
+    #if request.method == 'POST':
+    #    print (request.POST.get('title'))
+    #    print (request.POST.get('body'))
+    
     context = {
         'title': 'Create Post',
         'form': form
