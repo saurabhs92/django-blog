@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Post
+from .forms import PostForm
 
 #def index(request):
 #    data = {'indexdata': 'Data from views.py file.'}
@@ -23,7 +24,12 @@ def post_detail(request, id):
     return render(request, 'blog/post_detail.html', context)
     
 def post_create(request):
-    return HttpResponse('<h1>Create</h1>')
+    form = PostForm()
+    context = {
+        'title': 'Create Post',
+        'form': form
+    }
+    return render(request, 'blog/post_create.html', context)
 
 def post_update(request):
     return HttpResponse('<h1>Update</h1>')
