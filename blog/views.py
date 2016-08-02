@@ -39,8 +39,18 @@ def post_create(request):
     }
     return render(request, 'blog/post_create.html', context)
 
-def post_update(request):
-    return HttpResponse('<h1>Update</h1>')
+def post_update(request, id):
+    instance = get_object_or_404(Post, id=id)
+    form = PostForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+    context = {
+        'title': instance.title,
+        'form': form,
+        'instance': instance
+    }
+    return render(request, 'blog/post_create.html', context)
 
 def post_delete(request):
     return HttpResponse('<h1>Delete</h1>')
