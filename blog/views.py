@@ -14,7 +14,7 @@ def post_list(request):
         'object_list': queryset,
         'title': 'Posts'
     }
-    return render(request, 'blog/index.html', context)
+    return render(request, 'blog/base.html', context)
 
 def post_detail(request, id):
     instance = get_object_or_404(Post, id=id)

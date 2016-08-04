@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <title>Blog - {% block title %} {% endblock title %}</title>
+</head>
+<body>
+<div class="container">
+
+{% block content %}
+
+{% for obj in object_list %}
+{% url "blogs:detail" id=obj.id %}
+<a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <br>
+
+{{ obj.body }}<br>
+{{ obj.author }}<br>
+{{ obj.category }}<br>
+{{ obj.tags }}<br>
+{{ obj.id }}<br>
+{{ obj.pk }}<br>
+<br>
+
+{% endfor %}
+
+{% endblock content %}
+</div>
+</body>
+</html>
