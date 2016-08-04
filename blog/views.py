@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from .models import Post
@@ -32,7 +32,7 @@ def post_create(request):
         messages.success(request, 'Sucessfully Created')
         return HttpResponseRedirect(instance.get_absolute_url())
     else:
-        messages.failure(request, 'Unable to create the post.')
+        messages.error(request, 'Unable to create the post.')
     context = {
         'title': 'Create Post',
         'form': form
@@ -54,5 +54,8 @@ def post_update(request, id):
     }
     return render(request, 'blog/post_create.html', context)
 
-def post_delete(request):
-    return HttpResponse('<h1>Delete</h1>')
+def post_delete(request, id):
+    instance = get_object_or_404(Post, id=id)
+    instance.delete()
+    messages.success(request, 'Successfully deleted.')
+    return redirect('blogs:list')
