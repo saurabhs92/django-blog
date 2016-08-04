@@ -1,17 +1,11 @@
 {% extends 'blog/base.html' %}
 
-{% block title %} {{ title }} {% endblock title %}
+{% block title %} 
+{{ instance.title }} | {{ block.super }} 
+{% endblock title %}
 
 {% block content %}
-<h1>Contents of {{title}} page</h1>
-
-{% if messages %}
-<ul class="messages">
-  {% for message in messages %}
-  <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{ message }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+<h1>{{title}}</h1>
 
 {{ instance.title }}<br>
 {{ instance.body }}<br>
