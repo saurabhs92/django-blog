@@ -1,18 +1,24 @@
 {% extends 'blog/base.html' %}
 
-
-
 {% block content %}
 
+<div class='col-sm-6 col-sm-offset-3'>
 <h1> {{title}}</h1>
 
 {% for obj in object_list %}
-  <div class='col-sm-6'>
-  <a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <br>
-
-  {{ obj.body|linebreaks|truncatechars:120 }}<br>
-  {{ obj.author }}<br>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.created_date|timesince }} ago</small></h3>
+        <p>  {{ obj.body|linebreaks|truncatechars:120 }}</p>
+	{{ obj.author }}
+        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+      </div>
+    </div>
   </div>
-
+</div>
 {% endfor %}
+</div>
+
 {% endblock content %}
