@@ -1,19 +1,18 @@
 {% extends 'blog/base.html' %}
 
+
+
 {% block content %}
 
+<h1> {{title}}</h1>
+
 {% for obj in object_list %}
-  {% url "blogs:detail" id=obj.id %}
+  <div class='col-sm-6'>
   <a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <br>
 
-  {{ obj.body }}<br>
+  {{ obj.body|linebreaks|truncatechars:120 }}<br>
   {{ obj.author }}<br>
-  {{ obj.category }}<br>
-  {{ obj.tags }}<br>
-  {{ obj.id }}<br>
-  {{ obj.pk }}<br>
-<br>
+  </div>
 
 {% endfor %}
-
 {% endblock content %}
