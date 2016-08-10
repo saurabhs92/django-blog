@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/saurabh/work/django/blog-django/venv/bin/python
 import os
 import sys
 
