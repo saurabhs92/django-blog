@@ -11,7 +11,7 @@ from .forms import PostForm
 
 def post_list(request):
     queryset_list = Post.objects.all()
-    paginator = Paginator(queryset_list, 3) # Show 5 entries per page
+    paginator = Paginator(queryset_list, 5) # Show 5 entries per page
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
     try:
@@ -39,7 +39,7 @@ def post_detail(request, id):
     return render(request, 'blog/post_detail.html', context)
     
 def post_create(request):
-    form = PostForm(request.POST or None)
+    form = PostForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
@@ -53,7 +53,7 @@ def post_create(request):
 
 def post_update(request, id):
     instance = get_object_or_404(Post, id=id)
-    form = PostForm(request.POST or None, instance=instance)
+    form = PostForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
