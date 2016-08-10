@@ -34,6 +34,7 @@ class Post(models.Model):
     Defines the blog_post table
     """
     title = models.CharField(max_length=200)
+    image = models.FileField(null=True, blank=True)
     body  = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_date = models.DateTimeField(auto_now_add=False, auto_now=True)
