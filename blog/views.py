@@ -11,9 +11,9 @@ from .forms import PostForm
 
 def post_list(request):
     queryset_list = Post.objects.all()
-    paginator = Paginator(queryset_list, 5) # Show 5 entries per page
-    
-    page = request.GET.get('page')
+    paginator = Paginator(queryset_list, 3) # Show 5 entries per page
+    page_request_var = 'page'
+    page = request.GET.get(page_request_var)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -25,7 +25,8 @@ def post_list(request):
 
     context = {
         'object_list': queryset,
-        'title': 'Posts'
+        'title': 'Posts',
+        'page_request_var': page_request_var,
     }
     return render(request, 'blog/post_list.html', context)
 
