@@ -9,6 +9,10 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="thumbnail">
+      {% if obj.image %}
+        <img src='{{ obj.image.url }}' class='img-responsive' />
+      {% endif %}
+
       <div class="caption">
         <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.created_date|timesince }} ago</small></h3>
         <p>  {{ obj.body|linebreaks|truncatechars:420 }}</p>

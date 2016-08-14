@@ -6,11 +6,15 @@
 
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
-<h1>{{title}} <small>{{ instance.created_date|timesince }} ago</small> </h1>
+  
+  {% if instance.image %}
+  <img src='{{ instance.image.url }}' class='img-responsive' />
+  {% endif %}
+  <h1>{{title}} <small>{{ instance.created_date|timesince }} ago</small> </h1>
 
-{{ instance.body|linebreaks }}<br>
-{{ instance.author }}<br>
-<br>
+  {{ instance.body|linebreaks }}<br>
+  {{ instance.author }}<br>
+  <br>
 
 </div>
 {% endblock content %}
