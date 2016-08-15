@@ -29,12 +29,17 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag_name
 
+def upload_location(instance, filename):
+    return "%s/%s" % (instance.id, filename)
+
 class Post(models.Model):
     """
     Defines the blog_post table
     """
     title = models.CharField(max_length=200)
-    image = models.FileField(null=True, blank=True)
+    image = models.FileField(upload_to=upload_location, 
+                             null=True, 
+                             blank=True)
     #, height_field='height_field', width_field='width_field')
     #height_field = models.IntegerField(default=0)
     #width_field = models.IntegerField(default=0)
