@@ -37,6 +37,7 @@ class Post(models.Model):
     Defines the blog_post table
     """
     title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
     image = models.FileField(upload_to=upload_location, 
                              null=True, 
                              blank=True)
