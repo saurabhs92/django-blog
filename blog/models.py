@@ -1,5 +1,7 @@
-from django.db import models
 from django.core.urlresolvers import reverse
+from django.db import models
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
 
 class Author(models.Model):
     """
@@ -59,3 +61,13 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-created_date', '-updated_date']
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    slug = slugify(instance.title)
+    exists = Post.objects.filter(slug=slug).exists()
+    if exists:
+        slug = "%s-%s" % (slug, instance.id)
+    instance.slug = slug
+
+pre_save.connect(pre_save_post_receiver, sender=Post)
+
