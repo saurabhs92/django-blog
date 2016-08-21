@@ -1,3 +1,4 @@
+from urllib.parse import quote_plus
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -32,9 +33,11 @@ def post_list(request):
 
 def post_detail(request, slug):
     instance = get_object_or_404(Post, slug=slug)
+    share_string = quote_plus(instance.body)
     context = {
         'title': instance.title,
-        'instance': instance
+        'instance': instance,
+        'share_string': share_string,
     }
     return render(request, 'blog/post_detail.html', context)
     
