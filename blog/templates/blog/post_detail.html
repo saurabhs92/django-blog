@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load urlify %}
 
 {% block title %} 
 {{ instance.title }} | {{ block.super }} 
@@ -15,12 +16,14 @@
   {{ instance.body|linebreaks }}<br>
   {{ instance.author }}<br>
   <br>
+  {{ instance.content|urlify }}<br>
+  
 
   <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
     Facebook
   </a>
 
-  <a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">
+  <a href="https://twitter.com/home?status={{ instance.content|urlify }}%20{{ request.build_absolute_uri }}">
     Twitter
   </a>
 
@@ -28,11 +31,11 @@
     Google Plus
   </a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ instance.content|urlify }}&source={{ request.build_absolute_uri }}">
     Linkedin
   </a>
 
-  <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}">
+  <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ instance.title }}">
     Reddit
   </a>
 
