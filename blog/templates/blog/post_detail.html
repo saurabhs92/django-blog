@@ -12,9 +12,9 @@
   <img src='{{ instance.image.url }}' class='img-responsive' />
   {% endif %}
   <h1>{{title}} <small>{{ instance.created_date|timesince }} ago</small> </h1>
+  <p>Author: {{ instance.author }}</p>
 
   {{ instance.body|linebreaks }}<br>
-  {{ instance.author }}<br>
   <br>
   {{ instance.content|urlify }}<br>
   
