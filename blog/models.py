@@ -47,6 +47,8 @@ class Post(models.Model):
     #height_field = models.IntegerField(default=0)
     #width_field = models.IntegerField(default=0)
     body  = models.TextField()
+    draft = models.BooleanField(default=False)
+    publish = models.DateField(auto_now=False, auto_now_add=False)
     created_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_date = models.DateTimeField(auto_now_add=False, auto_now=True)
     author   = models.ForeignKey(Author)
