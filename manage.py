@@ -1,4 +1,4 @@
-#!/home/saurabh/work/django/blog-django/venv/bin/python
+#!/home/saurabh/work/django/blog-django/newenv/bin/python
 import os
 import sys
 
