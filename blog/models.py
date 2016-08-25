@@ -36,7 +36,7 @@ def upload_location(instance, filename):
     return "%s/%s" % (instance.id, filename)
 
 class PostManager(models.Manager):
-    def all(self, *args, **kwargs):
+    def active(self, *args, **kwargs):
         # super(PostManager, self).all() <=> Post.objects.all()
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 

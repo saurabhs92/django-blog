@@ -14,6 +14,8 @@
       {% endif %}
 
       <div class="caption">
+	{% if obj.draft %} <h4> Staff Only: Draft </h4>{% endif %}
+	{% if obj.publish > today %} <h4> Staff Only: Future Post </h4>{% endif %}
         <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
 	<p>Author: {{ obj.author }}</p>
         <p>  {{ obj.body|linebreaks|truncatechars:420 }}</p>

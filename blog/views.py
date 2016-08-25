@@ -12,7 +12,10 @@ from .forms import PostForm
 #    return render(request, 'blog/index.html', data)
 
 def post_list(request):
-    queryset_list = Post.objects.all()
+    today = timezone.now().date()
+    queryset_list = Post.objects.active()
+    if request.user.is_staff or request.user.is_superuser:
+        queryset_list = Post.objects.all()
     paginator = Paginator(queryset_list, 5) # Show 5 entries per page
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
@@ -29,11 +32,15 @@ def post_list(request):
         'object_list': queryset,
         'title': 'Posts',
         'page_request_var': page_request_var,
+        'today': today,
     }
     return render(request, 'blog/post_list.html', context)
 
 def post_detail(request, slug):
     instance = get_object_or_404(Post, slug=slug)
+    if instance.draft or instance.publish > timezone.now().date():
+        if not request.user.is_staff or not request.user.is_superuser:
+            raise Http404
     share_string = quote_plus(instance.body)
     context = {
         'title': instance.title,
