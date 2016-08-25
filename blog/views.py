@@ -16,6 +16,9 @@ def post_list(request):
     queryset_list = Post.objects.active()
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
+    query = request.GET.get('q')
+    if query:
+        queryset_list = Post.objects.filter(title__icontains=query)
     paginator = Paginator(queryset_list, 5) # Show 5 entries per page
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
