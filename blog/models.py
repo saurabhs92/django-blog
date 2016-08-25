@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
+from django.utils import timezone
 from django.utils.text import slugify
 
 class Author(models.Model):
@@ -34,6 +35,11 @@ class Tag(models.Model):
 def upload_location(instance, filename):
     return "%s/%s" % (instance.id, filename)
 
+class PostManager(models.Manager):
+    def all(self, *args, **kwargs):
+        # super(PostManager, self).all() <=> Post.objects.all()
+        return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
+
 class Post(models.Model):
     """
     Defines the blog_post table
@@ -54,13 +60,15 @@ class Post(models.Model):
     author   = models.ForeignKey(Author)
     categories = models.ManyToManyField(Category)
     tags = models.ManyToManyField(Tag)
-    
+
+    objects = PostManager()
+
     def __str__(self):
         return self.title
     
     def get_absolute_url(self):
         return reverse('blogs:detail', kwargs={"slug": self.slug})
-    
+        
     class Meta:
         ordering = ['-created_date', '-updated_date']
 

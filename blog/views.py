@@ -12,7 +12,7 @@ from .forms import PostForm
 #    return render(request, 'blog/index.html', data)
 
 def post_list(request):
-    queryset_list = Post.objects.filter(draft=False).filter(publish__lte=timezone.now())
+    queryset_list = Post.objects.all()
     paginator = Paginator(queryset_list, 5) # Show 5 entries per page
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
