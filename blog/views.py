@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 
@@ -11,7 +12,7 @@ from .forms import PostForm
 #    return render(request, 'blog/index.html', data)
 
 def post_list(request):
-    queryset_list = Post.objects.all()
+    queryset_list = Post.objects.filter(draft=False).filter(publish__lte=timezone.now())
     paginator = Paginator(queryset_list, 5) # Show 5 entries per page
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
