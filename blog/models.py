@@ -71,10 +71,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blogs:detail', kwargs={"slug": self.slug})
         
-    def get_markdown(self):
+    def get_html(self):
         content = self.body
-        markdown_text = markdown(content)
-        return mark_safe(markdown_text)
+        html_text = markdown(content)
+        return mark_safe(html_text)
         
     class Meta:
         ordering = ['-created_date', '-updated_date']

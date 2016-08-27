@@ -18,7 +18,7 @@
   </p>
   <hr>
   <div class='col-sm-12'>
-  <div class='post-detail-item'>{{ instance.get_markdown }}</div>
+  <div class='post-detail-item'>{{ instance.get_html }}</div>
   <hr>
 
   <p>
@@ -26,8 +26,7 @@
   </p>
   </div>
   <br>
-<p><a href="edit" class="btn btn-primary" role="button">Edit</a></p>
-<p><a href="delete" class="btn btn-primary" role="button">Delete</a></p>
+<p><a href="edit" class="btn btn-primary" role="button">Edit</a> <a href="delete" class="btn btn-primary" role="button">Delete</a></p>
 
   <p>Share Post:
   <a href="https://twitter.com/home?status={{ instance.content|urlify }}%20{{ request.build_absolute_uri }}">
