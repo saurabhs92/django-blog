@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Third party
     'debug_toolbar',
     'crispy_forms',
+    'markdown_deux',
     'pagedown',
 
     # Local apps
