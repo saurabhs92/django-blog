@@ -37,9 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+
+    # Third party
     'debug_toolbar',
     'crispy_forms',
+    'pagedown',
+
+    # Local apps
+    'blog',
 ]
 
 MIDDLEWARE_CLASSES = [
