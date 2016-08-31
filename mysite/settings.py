@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'blog',
+    'comments',
 ]
 
 MIDDLEWARE_CLASSES = [
