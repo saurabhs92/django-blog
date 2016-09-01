@@ -1,12 +1,14 @@
 from urllib.parse import quote_plus
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.contrib import messages
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
+from comments.models import Comment
 
 #def index(request):
 #    data = {'indexdata': 'Data from views.py file.'}
@@ -50,10 +52,16 @@ def post_detail(request, slug):
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
     share_string = quote_plus(instance.body)
+    
+    content_type = ContentType.objects.get_for_model(Post)
+    obj_id = instance.id
+    comments = Comment.objects.filter(content_type=content_type, object_id=obj_id)
+    
     context = {
         'title': instance.title,
         'instance': instance,
         'share_string': share_string,
+        'comments': comments,
     }
     return render(request, 'blog/post_detail.html', context)
     
