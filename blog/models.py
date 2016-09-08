@@ -75,7 +75,15 @@ class Post(models.Model):
         content = self.body
         html_text = markdown(content)
         return mark_safe(html_text)
-        
+
+    @property
+    def comments(self):
+        # not importing globally to avoid circular imports between both models 
+        from comments.models import Comment
+        instance = self
+        qs = Comment.objects.filter_by_instance(instance)
+        return qs
+    
     class Meta:
         ordering = ['-created_date', '-updated_date']
 

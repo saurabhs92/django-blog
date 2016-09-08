@@ -53,7 +53,7 @@ def post_detail(request, slug):
             raise Http404
     share_string = quote_plus(instance.body)
     
-    comments = Comment.objects.filter_by_instance(instance)
+    comments = instance.comments
     
     context = {
         'title': instance.title,
