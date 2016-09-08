@@ -27,12 +27,15 @@
     </div>
     <div>
       <p class='lead'>Comments</p>
+      <hr/>
       {% for comment in comments %}
-      	  {{ comment.content }} <br>
-      	  <small> {{ comment.user }} | {{ comment.timestamp|timesince}} ago</small>
-	  <hr>
+      <blockquote>
+	<p> {{ comment.content }} </p>
+	<footer>{{ comment.user }} | {{ comment.timestamp|timesince}} ago</footer>
+      </blockquote>
+      <hr/>
       {% endfor %}
-      </div>
+    </div>
     <!-- <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div> -->
   </p>
   </div>
