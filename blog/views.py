@@ -60,16 +60,25 @@ def post_detail(request, slug):
         'obj_id': instance.id,
     }
 
-    comment_form = CommentForm(request.POST or None, initial=initial_data)
-    if comment_form.is_valid():
-        print (comment_form.cleaned_data)
-    
+    form = CommentForm(request.POST or None, initial=initial_data)
+    if form.is_valid():
+        if form.is_valid():
+            c_type = form.cleaned_data.get('content_type')
+            obj_id = form.cleaned_data.get('obj_id')
+            content_data = form.cleaned_data.get('content')
+            new_comment, created = Comment.objects.get_or_create(
+                                        user = request.user,
+                                        content_type = c_type,
+                                        object_id = obj_id,
+                                        content = content_data,
+            			)
+            
     context = {
         'title': instance.title,
         'instance': instance,
         'share_string': share_string,
         'comments': comments,
-        'comment_form': comment_form,
+        'comment_form': form,
     }
     return render(request, 'blog/post_detail.html', context)
     
