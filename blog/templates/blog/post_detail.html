@@ -28,6 +28,10 @@
     <div>
       <p class='lead'>Comments</p>
       <hr/>
+      <form method='POST' action='.'> {% csrf_token %}
+	{{ comment_form }}
+	<input type='submit' value='Post Comment' class='btn btn-default'>
+	</form>
       {% for comment in comments %}
       <blockquote>
 	<p> {{ comment.content }} </p>
