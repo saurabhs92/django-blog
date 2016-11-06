@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
@@ -64,11 +65,12 @@ def post_detail(request, slug):
     if form.is_valid():
         if form.is_valid():
             c_type = form.cleaned_data.get('content_type')
+            content_type = ContentType.objects.get(model=c_type)
             obj_id = form.cleaned_data.get('obj_id')
             content_data = form.cleaned_data.get('content')
             new_comment, created = Comment.objects.get_or_create(
                                         user = request.user,
-                                        content_type = c_type,
+                                        content_type = content_type,
                                         object_id = obj_id,
                                         content = content_data,
             			)
