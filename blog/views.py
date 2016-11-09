@@ -10,6 +10,7 @@ from .models import Post
 from .forms import PostForm
 from comments.models import Comment
 from comments.forms import CommentForm
+from .utils import get_read_time
 
 #def index(request):
 #    data = {'indexdata': 'Data from views.py file.'}
@@ -56,6 +57,8 @@ def post_detail(request, slug):
     
     comments = instance.comments
 
+    print(get_read_time(instance.get_html()))
+    
     initial_data = {
         'content_type': instance.get_content_type,
         'obj_id': instance.id,
