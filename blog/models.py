@@ -60,6 +60,7 @@ class Post(models.Model):
     publish = models.DateField(auto_now=False, auto_now_add=False)
     created_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_date = models.DateTimeField(auto_now_add=False, auto_now=True)
+    read_time = models.TimeField(null=True, blank=True)
     author   = models.ForeignKey(Author)
     categories = models.ManyToManyField(Category)
     tags = models.ManyToManyField(Tag)
