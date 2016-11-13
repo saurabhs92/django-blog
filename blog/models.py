@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
 from markdown_deux import markdown
+from .utils import get_read_time
 
 class Author(models.Model):
     """
@@ -109,6 +110,13 @@ def create_slug(instance, new_slug=None):
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
+
+    if instance.body:
+        html_string = instance.get_html()
+        read_time_var = get_read_time(html_string)
+        instance.read_time = read_time_var
+
+
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
 
