@@ -3,6 +3,9 @@
 
 {% block title %} {{ title }} | {{ block.super }} {% endblock title %}
 
+{% block head_extra %} 
+{{ form.media }}
+{% endblock head_extra %}
 
 {% block content %}
 <div class='col-sm-3 col-sm-offset-3'>
