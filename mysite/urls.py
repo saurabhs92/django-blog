@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^blog/', include('blog.urls', namespace='blogs')),
     url(r'^admin/', admin.site.urls),
     url(r'^login/', login_view, name='login'),
+    url(r'^logout/', logout_view, name='logout'),
 ]
 
 if settings.DEBUG:

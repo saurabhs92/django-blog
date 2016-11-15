@@ -16,10 +16,12 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         print(request.user.is_authenticated())
+        # redirect
     return render(request, 'blog/login_form.html', {'form': form, 'title': title})
 
 def register_view(request):
     return render(request, 'blog/login_form.html', {})
 
 def logout_view(request):
+    logout(request)
     return render(request, 'blog/login_form.html', {})
