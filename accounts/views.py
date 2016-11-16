@@ -27,7 +27,7 @@ def register_view(request):
         'form': form,
     }
     return render(request, 'blog/login_form.html', context)
-
+    
 def logout_view(request):
     logout(request)
     return render(request, 'blog/login_form.html', {})
