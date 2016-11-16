@@ -5,7 +5,7 @@ from django.contrib.auth import (
     logout,
     )
 from django.shortcuts import render
-from .forms import UserLoginForm
+from .forms import UserLoginForm, UserRegisterForm
 
 def login_view(request):
     title = 'Login'
@@ -20,7 +20,13 @@ def login_view(request):
     return render(request, 'blog/login_form.html', {'form': form, 'title': title})
 
 def register_view(request):
-    return render(request, 'blog/login_form.html', {})
+    title = 'Register'
+    form = UserRegisterForm(request.POST or None)
+    context = {
+        'title': title,
+        'form': form,
+    }
+    return render(request, 'blog/login_form.html', context)
 
 def logout_view(request):
     logout(request)
