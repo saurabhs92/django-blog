@@ -61,7 +61,7 @@ class Post(models.Model):
     publish = models.DateField(auto_now=False, auto_now_add=False)
     created_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_date = models.DateTimeField(auto_now_add=False, auto_now=True)
-    read_time = models.IntegerField(default=0) # Assume minutes
+    # read_time = models.IntegerField(default=0) # Assume minutes
     author   = models.ForeignKey(Author)
     categories = models.ManyToManyField(Category)
     tags = models.ManyToManyField(Tag)
@@ -111,10 +111,10 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
     
-    if instance.body:
-        html_string = instance.get_html()
-        read_time_var = get_read_time(html_string)
-        instance.read_time = read_time_var
+    # if instance.body:
+    #     html_string = instance.get_html()
+    #     read_time_var = get_read_time(html_string)
+    #     instance.read_time = read_time_var
 
 
 

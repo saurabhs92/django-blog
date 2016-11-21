@@ -12,7 +12,7 @@
   <img src='{{ instance.image.url }}' class='img-responsive' />
   {% endif %}
   <h1>{{title}} <small> {% if instance.draft %} <span style='color:red;'> Draft </span> {% endif %}{{ instance.publish }} </small> </h1>
-  <p>Read Time: {% if instance.read_time <= 1 %} < 1 Minute {% else %} {{ instance.read_time }} minutes {% endif %} </p>
+  <!-- <p>Read Time: {% if instance.read_time <= 1 %} < 1 Minute {% else %} {{ instance.read_time }} minutes {% endif %} </p> -->
   <p>Author: {{ instance.author }}</p>
   <p>
     <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
@@ -33,13 +33,6 @@
 	{{ comment_form }}
 	<input type='submit' value='Post Comment' class='btn btn-default'>
 	</form>
-      {% for comment in comments %}
-      <blockquote>
-	<p> {{ comment.content }} </p>
-	<footer>{{ comment.user }} | {{ comment.timestamp|timesince}} ago</footer>
-      </blockquote>
-      <hr/>
-      {% endfor %}
     </div>
     <!-- <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div> -->
   </p>
